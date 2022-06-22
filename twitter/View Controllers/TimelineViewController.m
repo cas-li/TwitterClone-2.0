@@ -8,8 +8,12 @@
 
 #import "TimelineViewController.h"
 #import "APIManager.h"
+#import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "Tweet.h"
 
 @interface TimelineViewController ()
+- (IBAction)didTapLogout:(id)sender;
 
 @end
 
@@ -22,8 +26,8 @@
     [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
             NSLog(@"😎😎😎 Successfully loaded home timeline");
-            for (NSDictionary *dictionary in tweets) {
-                NSString *text = dictionary[@"text"];
+            for (Tweet *tweet in tweets) {
+                NSString *text = tweet.text;
                 NSLog(@"%@", text);
             }
         } else {
@@ -48,4 +52,12 @@
 */
 
 
+- (IBAction)didTapLogout:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    appDelegate.window.rootViewController = loginViewController;
+    [[APIManager shared] logout];
+}
 @end
