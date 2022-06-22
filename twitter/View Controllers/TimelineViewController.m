@@ -14,6 +14,7 @@
 
 @interface TimelineViewController ()
 - (IBAction)didTapLogout:(id)sender;
+@property (strong, nonatomic) NSMutableArray *arrayOfTweets;
 
 @end
 
@@ -30,6 +31,7 @@
                 NSString *text = tweet.text;
                 NSLog(@"%@", text);
             }
+            self.arrayOfTweets = (NSMutableArray *)tweets;
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
