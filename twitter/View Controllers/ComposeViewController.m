@@ -36,5 +36,6 @@
 }
 
 - (IBAction)didTapClose:(id)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 @end
