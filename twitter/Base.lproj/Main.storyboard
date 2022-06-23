@@ -131,6 +131,9 @@
                                                             <rect key="frame" x="125" y="0.0" width="62.5" height="44"/>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="favor-icon" title="n"/>
+                                                            <connections>
+                                                                <action selector="didTapFavorite:" destination="qbg-Gz-WeW" eventType="touchUpInside" id="GgA-G1-4Hv"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrg-k8-x5f">
                                                             <rect key="frame" x="187.5" y="0.0" width="54" height="44"/>
