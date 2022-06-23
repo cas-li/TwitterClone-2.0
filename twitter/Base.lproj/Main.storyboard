@@ -126,6 +126,9 @@
                                                             <rect key="frame" x="62.5" y="0.0" width="62.5" height="44"/>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="retweet-icon" title="n"/>
+                                                            <connections>
+                                                                <action selector="didTapRetweet:" destination="qbg-Gz-WeW" eventType="touchUpInside" id="seP-PA-SGn"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t3W-l6-m1X">
                                                             <rect key="frame" x="125" y="0.0" width="62.5" height="44"/>
