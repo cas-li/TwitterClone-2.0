@@ -19,6 +19,8 @@
 - (IBAction)didTapLogout:(id)sender;
 @property (strong, nonatomic) NSMutableArray *arrayOfTweets;
 @property (nonatomic) BOOL isRefreshing;
+- (IBAction)didTapEdit:(id)sender;
+- (IBAction)didTapCompose:(id)sender;
 
 @end
 
@@ -116,4 +118,9 @@
     return cell;
 }
 
+- (IBAction)didTapCompose:(id)sender {
+}
+
+- (IBAction)didTapEdit:(id)sender {
+}
 @end
