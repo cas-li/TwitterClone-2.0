@@ -9,8 +9,9 @@
 #import "ComposeViewController.h"
 #import "APIManager.h"
 
-@interface ComposeViewController ()
+@interface ComposeViewController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *composeTweet;
+@property (weak, nonatomic) IBOutlet UILabel *tweetHere;
 
 @end
 
@@ -19,7 +20,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.composeTweet.delegate = self;
     
+    
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    self.tweetHere.hidden = (textView.text.length > 0);
 }
 
 /*
