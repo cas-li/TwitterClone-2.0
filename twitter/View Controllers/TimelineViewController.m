@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)didTapLogout:(id)sender;
 @property (strong, nonatomic) NSMutableArray *arrayOfTweets;
+@property (nonatomic) BOOL isRefreshing;
 
 @end
 

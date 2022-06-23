@@ -24,7 +24,9 @@
 -(void)setTweet:(Tweet *)tweet{
 //    self.profilePicture.image = ;
     self.name.text = tweet.user.name;
-    self.username.text = tweet.user.screenName;
+    
+    NSString *at = @"@";
+    self.username.text = [NSString stringWithFormat:@"%@%@", at, tweet.user.screenName];
     self.date.text = tweet.createdAtString;
     self.tweetContent.text = tweet.text;
     
