@@ -28,22 +28,6 @@
 
     [self refreshData];
 
-//    self.name.text = tweet.user.name;
-//
-//    NSString *at = @"@";
-//    self.username.text = [NSString stringWithFormat:@"%@%@", at, tweet.user.screenName];
-//    self.date.text = tweet.createdAtString;
-//    self.tweetContent.text = tweet.text;
-//
-//    self.profilePicture.image = nil;
-//    NSString *URLString = tweet.user.profilePicture;
-//    NSURL *url = [NSURL URLWithString:URLString];
-//    NSData *urlData = [NSData dataWithContentsOfURL:url];
-//    self.profilePicture.image = [UIImage imageWithData: urlData];
-//
-//    self.retweetButton.titleLabel.text = [NSString stringWithFormat:@"%d",tweet.retweetCount];
-//
-//    self.likesButton.titleLabel.text = [NSString stringWithFormat:@"%d",tweet.favoriteCount];
 }
 
 - (IBAction)didTapFavorite:(id)sender {
@@ -109,14 +93,15 @@
 }
 
 
--(void)refreshData{
+-(void)refreshData {
     
     self.name.text = self.tweet.user.name;
     
     NSString *at = @"@";
     self.username.text = [NSString stringWithFormat:@"%@%@", at, self.tweet.user.screenName];
-//    self.date.text = self.tweet.createdAtString;
+
     self.date.text = self.tweet.createdAtDate.shortTimeAgoSinceNow;
+    
     self.tweetContent.text = self.tweet.text;
     
     self.profilePicture.image = nil;
@@ -128,8 +113,6 @@
     [self.retweetButton setTitle:[NSString stringWithFormat:@"%d",self.tweet.retweetCount] forState:UIControlStateNormal];
 
     [self.likesButton setTitle:[NSString stringWithFormat:@"%d",self.tweet.favoriteCount] forState:UIControlStateNormal];
-    
-    [self.replyButton setTitle:[NSString stringWithFormat:@" "] forState:UIControlStateNormal];
     
     if (self.tweet.favorited == YES) {
         [self.likesButton setImage:[UIImage imageNamed:@"favor-icon-red.png"] forState:UIControlStateNormal];
