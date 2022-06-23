@@ -8,6 +8,7 @@
 
 #import "TweetCell.h"
 #import "APIManager.h"
+#import "DateTools.h"
 
 @implementation TweetCell
 
@@ -114,7 +115,8 @@
     
     NSString *at = @"@";
     self.username.text = [NSString stringWithFormat:@"%@%@", at, self.tweet.user.screenName];
-    self.date.text = self.tweet.createdAtString;
+//    self.date.text = self.tweet.createdAtString;
+    self.date.text = self.tweet.createdAtDate.shortTimeAgoSinceNow;
     self.tweetContent.text = self.tweet.text;
     
     self.profilePicture.image = nil;
