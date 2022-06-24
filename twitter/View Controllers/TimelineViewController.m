@@ -56,6 +56,10 @@
     [self.tableView insertSubview:refreshControl atIndex:0];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
+}
+
 // Makes a network request to get updated data
 // Updates the tableView with the new data
 // Hides the RefreshControl
