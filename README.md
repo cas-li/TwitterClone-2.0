@@ -52,7 +52,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-![hippo](https://media.giphy.com/media/9XnNJ26E6KJlHt8Yyu/giphy.gif)
+![hippo](https://media.giphy.com/media/9AXy0M1UbjbCykUN7I/giphy.gif)
 
 Infinite scroll walkthrough:
 ![hippo](https://media.giphy.com/media/oOedxwffMtY1rh72Oo/giphy.gif)
