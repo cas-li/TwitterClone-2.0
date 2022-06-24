@@ -29,6 +29,15 @@
     self.tweetHere.hidden = (textView.text.length > 0);
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+
+    int characterLimit = 140;
+
+    NSString *newText = [self.composeTweet.text stringByReplacingCharactersInRange:range withString:text];
+
+    return newText.length < characterLimit;
+}
+
 /*
 #pragma mark - Navigation
 

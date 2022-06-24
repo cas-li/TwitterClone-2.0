@@ -15,13 +15,15 @@
 #import "ComposeViewController.h"
 #import "DetailsViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)didTapLogout:(id)sender;
 @property (strong, nonatomic) NSMutableArray *arrayOfTweets;
 @property (nonatomic) BOOL isRefreshing;
 - (IBAction)didTapCompose:(id)sender;
+
+@property (assign, nonatomic) BOOL isMoreDataLoading;
 
 @end
 
@@ -60,6 +62,26 @@
     [self.tableView reloadData];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+     // Handle scroll behavior here
+    if(!self.isMoreDataLoading){
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+            self.isMoreDataLoading = true;
+            
+            [self beginRefresh:refreshControl];
+            
+//            [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
+//            [self.tableView insertSubview:refreshControl atIndex:-1];
+        }
+    }
+}
+
 // Makes a network request to get updated data
 // Updates the tableView with the new data
 // Hides the RefreshControl
@@ -73,7 +95,9 @@
                 NSLog(@"%@", text);
             }
             self.arrayOfTweets = (NSMutableArray *)tweets;
-//            self.tableView.rowHeight = UITableViewAutomaticDimension;
+            
+            self.isMoreDataLoading = false;
+
             [self.tableView reloadData];
             
             [refreshControl endRefreshing];
