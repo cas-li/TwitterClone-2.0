@@ -54,6 +54,22 @@
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
         </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="FI7-bA-XXu">
+            <objects>
+                <viewController id="kJw-ru-rfd" customClass="ProfileViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MKg-Y7-TUA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ltU-aE-rZF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="b9a-Re-fbg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6yQ-mV-Z2w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1670" y="-688"/>
+        </scene>
         <!--Home Timeline-->
         <scene sceneID="1Tv-nE-1AW">
             <objects>
@@ -233,6 +249,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="PQD-xX-Riu" id="Hmo-up-wuq"/>
+                        <segue destination="kJw-ru-rfd" kind="show" identifier="profileSegue" id="jy5-sv-bk7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQh-hN-GQg" userLabel="First Responder" sceneMemberID="firstResponder"/>

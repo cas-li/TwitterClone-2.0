@@ -14,6 +14,8 @@
 #import "TweetCell.h"
 #import "ComposeViewController.h"
 #import "DetailsViewController.h"
+#import "ProfileViewController.h"
+#import "User.h"
 
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
@@ -132,7 +134,17 @@
         
         DetailsViewController *detailsVC = [segue destinationViewController];
         detailsVC.tweet = dataToPass;
+    } else if ([segue.identifier isEqualToString:@"profileSegue"]) {
+        TweetCell *cell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        Tweet *passTweet = self.arrayOfTweets[indexPath.row];
+        User *dataToPass = passTweet.user;
+        
+        ProfileViewController *profileVC = [segue destinationViewController];
+        profileVC.user = dataToPass;
+        
     }
+    
 }
 
 
@@ -154,6 +166,7 @@
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
 
     cell.tweet = self.arrayOfTweets[indexPath.row];
+    cell.delegate = self;
 
     return cell;
 }
@@ -165,6 +178,11 @@
 - (void)didTweet:(Tweet *)tweet {
     [self.arrayOfTweets insertObject:tweet atIndex:0];
     [self.tableView reloadData];
+}
+
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
+    
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
 }
 
 @end
