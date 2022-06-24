@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *profilePicture;
 @property (nonatomic, strong) NSString *followerCount;
 @property (nonatomic, strong) NSString *followingCount;
+@property (nonatomic, strong) NSString *userId;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

@@ -53,6 +53,20 @@ static NSString * const baseURLString = @"https://api.twitter.com";
     return self;
 }
 
+- (void)getUserTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion userId:(NSString *)userId {
+    NSMutableDictionary *parameters = @{@"tweet_mode":@"extended", @"user_id":userId}.mutableCopy;
+    
+    [self GET:@"1.1/statuses/user_timeline.json"
+       parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSArray *  _Nullable tweetDictionaries) {
+           // Success
+           NSMutableArray *tweets = [Tweet tweetsWithArray:tweetDictionaries];
+           completion(tweets, nil);
+       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           // There was a problem
+           completion(nil, error);
+    }];
+}
+
 - (void)getHomeTimelineWithCompletion:(void(^)(NSArray *tweets, NSError *error))completion maxId:(NSString *_Nullable)maxId {
     NSMutableDictionary *parameters = @{@"tweet_mode":@"extended"}.mutableCopy;
     

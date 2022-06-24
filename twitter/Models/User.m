@@ -19,6 +19,8 @@
 
         self.followerCount = [dictionary[@"followers_count"] stringValue];
         self.followingCount = [dictionary[@"friends_count"] stringValue];
+        
+        self.userId = dictionary[@"id"];
 
     // Initialize any other properties
     }

@@ -7,14 +7,19 @@
 //
 
 #import "ProfileViewController.h"
+#import "TweetCell.h"
+#import "Tweet.h"
+#import "APIManager.h"
+#import "User.h"
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *followingCount;
 @property (weak, nonatomic) IBOutlet UILabel *followerCount;
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray<Tweet *> *arrayOfTweets;
 @end
 
 @implementation ProfileViewController
@@ -22,6 +27,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
+    [[APIManager shared] getUserTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully loaded home timeline");
+            for (Tweet *tweet in tweets) {
+                NSString *text = tweet.text;
+                NSLog(@"%@", text);
+            }
+            self.arrayOfTweets = (NSMutableArray *)tweets;
+//            self.tableView.rowHeight = UITableViewAutomaticDimension;
+            [self.tableView reloadData];
+            
+
+        } else {
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+        }
+    } userId:self.user.userId];
+    
+    
     self.name.text = self.user.name;
     
     NSString *at = @"@";
@@ -48,5 +75,18 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.arrayOfTweets.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
+
+    cell.tweet = self.arrayOfTweets[indexPath.row];
+//    cell.delegate = self;
+
+    return cell;
+}
 
 @end
