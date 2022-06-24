@@ -65,7 +65,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
      // Handle scroll behavior here
     if(!self.isMoreDataLoading){
         // Calculate the position of one screen length before the bottom of the results
@@ -76,7 +76,7 @@
         if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
             self.isMoreDataLoading = true;
             
-            [self beginRefresh:refreshControl];
+            [self loadMoreData];
             
 //            [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
 //            [self.tableView insertSubview:refreshControl atIndex:-1];
@@ -108,9 +108,31 @@
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
     }];
+}
+
+- (void)loadMoreData {
+    
+    [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
+        if (tweets) {
+            NSLog(@"😎😎😎 Successfully loaded home timeline");
+            for (Tweet *tweet in tweets) {
+                NSString *text = tweet.text;
+                NSLog(@"%@", text);
+            }
+            self.arrayOfTweets = (NSMutableArray *)tweets;
+            
+            self.isMoreDataLoading = false;
+
+            [self.tableView reloadData];
+            
+        } else {
+            NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
+        }
+    }];
   
 
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

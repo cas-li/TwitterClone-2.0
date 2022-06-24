@@ -16,6 +16,10 @@
         self.name = dictionary[@"name"];
         self.screenName = dictionary[@"screen_name"];
         self.profilePicture = dictionary[@"profile_image_url_https"];
+
+        self.followerCount = [dictionary[@"followers_count"] stringValue];
+        self.followingCount = [dictionary[@"friends_count"] stringValue];
+
     // Initialize any other properties
     }
     return self;

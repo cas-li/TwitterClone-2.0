@@ -9,6 +9,11 @@
 #import "ProfileViewController.h"
 
 @interface ProfileViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *username;
+@property (weak, nonatomic) IBOutlet UILabel *followingCount;
+@property (weak, nonatomic) IBOutlet UILabel *followerCount;
 
 @end
 
@@ -17,6 +22,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.name.text = self.user.name;
+    
+    NSString *at = @"@";
+    self.username.text = [NSString stringWithFormat:@"%@%@", at, self.user.screenName];
+    
+    self.profilePicture.image = nil;
+    NSString *URLString = self.user.profilePicture;
+    NSURL *url = [NSURL URLWithString:URLString];
+    NSData *urlData = [NSData dataWithContentsOfURL:url];
+    self.profilePicture.image = [UIImage imageWithData: urlData];
+    
+    self.followingCount.text = self.user.followingCount;
+    self.followerCount.text = self.user.followerCount;
+    
+//    self.
 }
 
 /*
