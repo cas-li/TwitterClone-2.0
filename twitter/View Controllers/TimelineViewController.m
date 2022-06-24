@@ -21,7 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)didTapLogout:(id)sender;
-@property (strong, nonatomic) NSMutableArray *arrayOfTweets;
+@property (strong, nonatomic) NSMutableArray<Tweet *> *arrayOfTweets;
 @property (nonatomic) BOOL isRefreshing;
 - (IBAction)didTapCompose:(id)sender;
 
@@ -54,7 +54,7 @@
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
-    }];
+    } maxId:nil];
     
     [refreshControl addTarget:self action:@selector(beginRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
@@ -107,7 +107,7 @@
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
-    }];
+    } maxId:nil];
 }
 
 - (void)loadMoreData {
@@ -119,7 +119,11 @@
                 NSString *text = tweet.text;
                 NSLog(@"%@", text);
             }
-            self.arrayOfTweets = (NSMutableArray *)tweets;
+            if (!self.arrayOfTweets) {
+                self.arrayOfTweets = (NSMutableArray *)tweets.mutableCopy;
+            } else {
+                [self.arrayOfTweets addObjectsFromArray:tweets];
+            }
             
             self.isMoreDataLoading = false;
 
@@ -128,7 +132,7 @@
         } else {
             NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
         }
-    }];
+    } maxId:self.arrayOfTweets.lastObject.idStr];
   
 
 }
