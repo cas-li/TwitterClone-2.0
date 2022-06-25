@@ -57,6 +57,9 @@ Here's a walkthrough of implemented user stories:
 Infinite scroll walkthrough:
 ![hippo](https://media.giphy.com/media/oOedxwffMtY1rh72Oo/giphy.gif)
 
+Full video because giphy is cutting off all of my GIFs:
+https://drive.google.com/file/d/1DK6Q4-X00Axb-_sy-Uh-Anp5O6LfrTOg/view
+
 GIF created with [Kap](https://getkap.co/).
 
 ## Notes
