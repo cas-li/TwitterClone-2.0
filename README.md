@@ -52,11 +52,6 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-![hippo](https://media.giphy.com/media/9AXy0M1UbjbCykUN7I/giphy.gif)
-
-Infinite scroll walkthrough:
-![hippo](https://media.giphy.com/media/oOedxwffMtY1rh72Oo/giphy.gif)
-
 Full video because giphy is cutting off all of my GIFs:
 https://drive.google.com/file/d/1DK6Q4-X00Axb-_sy-Uh-Anp5O6LfrTOg/view
 
